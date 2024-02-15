@@ -1,13 +1,13 @@
-package api.demomaven;
+package api.piglatin;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DemoMavenApplication {
+public class TranslationApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DemoMavenApplication.class, args);
+        SpringApplication.run(TranslationApplication.class, args);
     }
 
 }

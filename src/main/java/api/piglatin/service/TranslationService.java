@@ -1,17 +1,23 @@
-import org.jetbrains.annotations.NotNull;
+package api.piglatin.service;
 
-import java.util.Arrays;
+import api.piglatin.domain.Translation;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class PigLatin {
-    //Do pattern regex
+import static api.piglatin.util.StringUtils.firstVowelIndex;
 
-    public static String translator(String english){
+@Service
+@RequiredArgsConstructor
+public class TranslationService {
+
+    public static Translation translateEnglish(Translation translation){
         final Pattern WORD_PATTERN = Pattern.compile("\\b([a-zA-Z]*)([^a-zA-Z]*)\\b");
 
         StringBuilder pinLatin = new StringBuilder();
-        Matcher matcher = WORD_PATTERN.matcher(english);
+        Matcher matcher = WORD_PATTERN.matcher(translation.getEnglish());
 
         while(matcher.find()){
             String word = matcher.group(1);
@@ -23,8 +29,8 @@ public class PigLatin {
             }
             pinLatin.append(noWord);
         }
-
-        return pinLatin.toString();
+        translation.setPigLatin(pinLatin.toString());
+        return translation;
     }
 
     private static String translateWord(String word){
@@ -42,25 +48,4 @@ public class PigLatin {
         return translated;
     }
 
-    private static int firstVowelIndex(@NotNull String word){
-        String vowels = "AEIOUYaeiouy";
-        for (int i = 0; i < word.length(); i++){
-            if(vowels.indexOf(word.charAt(i)) != -1 ){
-                return i;
-            }
-        }
-        return word.length();
-    }
-
-    public static void main(String[] args){
-        String[] tests = {
-                "eye",
-                "Stop",
-                "No littering",
-                "No shirts, no shoes, no service",
-                "No persons under 14 admitted",
-                "Hey buddy, get away from my car!"};
-
-        Arrays.stream(tests).forEach(test -> System.out.println(translator(test)));
-    }
 }
