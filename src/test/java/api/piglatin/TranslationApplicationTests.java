@@ -1,10 +1,10 @@
-package api.demomaven;
+package api.piglatin;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DemoMavenApplicationTests {
+class TranslationApplicationTests {
 
     @Test
     void contextLoads() {
